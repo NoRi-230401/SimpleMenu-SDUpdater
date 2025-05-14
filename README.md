@@ -1,87 +1,95 @@
 # SimpleMenu-SDUpdater
+**[` 日本語 `](README_jp.md)**
 
+## 1. Introduction
 
-## 1. はじめに
+This program is a simple launcher for M5Stack devices (Cardputer, Core2, CoreS3) that lists applications (`.bin` files) stored on a microSD card, allowing you to select and run them.
+It utilizes the M5StackUpdater library to launch the selected application.
 
-このプログラムは、M5Stackデバイス（Cardputer, Core2, CoreS3）上で、microSDカードに保存されたアプリケーション（`.bin`ファイル）をリスト表示し、選択して実行するためのシンプルなランチャーです。
-M5StackUpdaterライブラリを利用して、選択したアプリケーションを起動します。
+**Original Program Author:** @shikarunochi
 
-**元プログラム作成者:** @shikarunochi
+**Modified by:** NoRi
 
-**改修者:** NoRi
+## 2. Supported Devices
 
+*   M5Stack Cardputer / Cardputer v1.1
+*   M5Stack Core2 / Core2 for AWS / Core2 v1.1
+*   M5Stack CoreS3 / CoreS3-SE
 
-## 2. 対応デバイス
+## 3. What You Need
 
-*   M5Stack Cardputer/Cardputer v1.1
-*   M5Stack Core2/Core2 for AWS/Core2 v1.1
-*   M5Stack CoreS3/CoreS3-SE
+*   One of the M5Stack devices listed above
+*   A microSD card
+*   Application files for M5Stack (in `.bin` format) that you want to run
 
-## 3. 準備するもの
+## 4. How to Use
 
-*   上記のいずれかのM5Stackデバイス
-*   microSDカード
-*   実行したいM5Stack用のアプリケーションファイル（`.bin`形式）
+### 4.1. Preparing the Program
 
-## 4. 使い方
+1.  Copy the `.bin` files of the applications you want to run to the **root directory** (the top-level folder) of your microSD card.
+    *   Example: `myapp.bin`, `game.bin`, etc.
 
-### 4.1. プログラムの準備
+### 4.2. Launching the Launcher
 
-1.  実行したいアプリケーションの`.bin`ファイルをmicroSDカードの**ルートディレクトリ**（一番上の階層）にコピーします。
-    *   例: `myapp.bin`, `game.bin` など
+1.  Flash this `SimpleMenu-SDUpdater` program (compiled from `SimpleMenu-SDUpdater\src\main.cpp`) to your M5Stack device.
+2.  When you power on the device, the launcher will start automatically.
 
-### 4.2. ランチャーの起動
+### 4.3. Selecting and Running Applications
 
-1.  この`SimpleMenu-SDUpdater`プログラム (`SimpleMenu-SDUpdater\src\main.cpp` をコンパイルしたもの) をM5Stackデバイスに書き込みます。
-2.  デバイスを起動すると、ランチャーが自動的に開始されます。
+A list of `.bin` files found in the root directory of the microSD card will be displayed alphabetically on the screen.
 
-### 4.3. アプリケーションの選択と実行
+*   **For M5Stack Cardputer:**
+    *   **Move cursor up:** `;` key (semicolon key, with an up arrow printed on it)
+    *   **Move cursor down:** `.` key (period key, with a down arrow printed on it)
+    *   **Execute:** `Enter` key
 
-画面に、microSDカードのルートディレクトリにある`.bin`ファイルの一覧がアルファベット順で表示されます。
+*   **For M5Stack Core2 / CoreS3:**
+    *   **Move cursor up:** `BtnA` (the leftmost button)
+    *   **Move cursor down:** `BtnC` (the rightmost button)
+    *   **Execute:** **Long press** `BtnB` (the middle button)
 
-*   **M5Stack Cardputer の場合:**
-    *   **カーソル上移動:** `;` キー (セミコロンキー、上矢印の印字があるキー)
-    *   **カーソル下移動:** `.` キー (ピリオドキー、下矢印の印字があるキー)
-    *   **実行:** `Enter` キー
+The selected application will be highlighted in green. Choose the application you want to run and execute it using the operations described above.
 
-*   **M5Stack Core2 / CoreS3 の場合:**
-    *   **カーソル上移動:** `BtnA` (一番左のボタン)
-    *   **カーソル下移動:** `BtnC` (一番右のボタン)
-    *   **実行:** `BtnB` (中央のボタン) を**長押し**
+### 4.4. After Running an Application
 
-選択したアプリケーションが緑色でハイライト表示されます。実行したいアプリケーションを選択し、上記の操作で実行してください。
+The selected application will be loaded and will start running.
+When the application finishes or the device is reset, the device will typically restart, and this launcher will usually start again (depending on the specifications of the selected application).
 
-### 4.4. アプリケーションの実行後
+## 5. About the Screen Display
 
-選択したアプリケーションが読み込まれ、実行が開始されます。
-アプリケーションの実行が終了するか、リセットされると、通常はデバイスが再起動し、再度このランチャーが起動します（選択したアプリケーションの仕様によります）。
+*   **File List:** Displays the names of the `.bin` files on the microSD card.
+*   **Selected File:** The file name currently under the cursor is displayed in **green**. Other file names are displayed in white.
+*   **File Name Length:** If a file name exceeds the screen width, it will be truncated.
+    *   Cardputer: Up to approximately 20 characters
+    *   Core2/CoreS3: Up to approximately 26 characters
+*   **Help Message (Core2/CoreS3 only):** A simple operation guide (`up`, `select`, `down`) is displayed in yellow at the bottom of the screen.
 
-## 5. 画面表示について
+## 6. Important Notes
 
-*   **ファイルリスト:** microSDカード内の`.bin`ファイル名が表示されます。
-*   **選択中のファイル:** 現在カーソルが合っているファイル名が**緑色**で表示されます。その他のファイル名は白色で表示されます。
-*   **ファイル名の長さ:** ファイル名が画面幅を超える場合、途中で省略されて表示されます。
-    *   Cardputer: 約20文字まで
-    *   Core2/CoreS3: 約26文字まで
-*   **ヘルプメッセージ (Core2/CoreS3のみ):** 画面下部に簡単な操作方法（`up`, `select`, `down`）が黄色で表示されます。
+*   Always place `.bin` files in the **root directory** of the microSD card. Files in subfolders will not be recognized.
+*   The file extension must be `.bin` (case-insensitive).
+*   There is a limit to the number of files that can be displayed on the screen at one time. If the file list is long, you can scroll by moving the cursor to select files.
+*   If the microSD card is not inserted correctly or cannot be recognized, the file list will not be displayed (or an empty list will be shown).
+*   Using multibyte characters (like Japanese) in file names may cause garbled text. It is recommended to use alphanumeric file names.
 
-## 6. 注意事項
+## 7. For Developers (Key Configuration Values in Code)
 
-*   `.bin`ファイルは必ずmicroSDカードの**ルートディレクトリ**に置いてください。サブフォルダ内のファイルは認識されません。
-*   ファイル拡張子は`.bin`である必要があります（大文字・小文字は問いません）。
-*   一度に画面に表示できるファイル数には限りがあります。ファイルリストが長い場合は、カーソルを移動させることでスクロールして選択できます。
-*   microSDカードが正しく挿入されていない、または認識できない場合、ファイルリストは表示されません（または空のリストが表示されます）。
-*   ファイル名に日本語などのマルチバイト文字を使用すると、文字化けする可能性があります。英数字のファイル名をおすすめします。
+You can customize some behaviors by changing the following defined values in the source code `SimpleMenu-SDUpdater\src\main.cpp`.
 
-## 7. 開発者向け情報 (コード内の主要な設定値)
-
-ソースコード `SimpleMenu-SDUpdater\src\main.cpp` 内の以下の定義値を変更することで、一部の動作をカスタマイズできます。
-
-*   `dispfileCount`: 1画面に表示する最大のファイル数（実際には `dispfileCount + 1` 個のファイルが表示されます）。
-    *   Cardputer: `7` (実際には8ファイル表示)
-    *   Core2/CoreS3: `12` (実際には13ファイル表示)
-*   `N_COLS`: ファイル名を表示する際の最大列数（おおよその文字数）。これを超えるファイル名は途中でカットされます。
+*   `dispfileCount`: The maximum number of files displayed on one screen (actually, `dispfileCount + 1` files will be displayed).
+    *   Cardputer: `7` (actually displays 8 files)
+    *   Core2/CoreS3: `12` (actually displays 13 files)
+*   `N_COLS`: The maximum number of columns (approximate characters) for displaying file names. File names exceeding this will be truncated.
     *   Cardputer: `20`
     *   Core2/CoreS3: `26`
 
----
+## 8. Link
+
+[SimpleMenu-SDUpdater](https://github.com/NoRi-230401/SimpleMenu-SDUpdater)
+
+[SDUpdater-AppTemplate-v2](https://github.com/NoRi-230401/SDUpdater-AppTemplate-v2)
+
+[CardputerSimpleLauncher@shikarunochi](https://github.com/shikarunochi/CardputerSimpleLaucher)
+
+[M5Stack-SD-Updater@tobozo](https://github.com/tobozo/M5Stack-SD-Updater)
+

@@ -65,6 +65,7 @@ void setup()
   M5Cardputer.begin(cfg, true);
   M5Cardputer.Display.setColorDepth(8);
   M5Cardputer.Display.setRotation(1);
+  M5Cardputer.Display.setBrightness(40);
 #else
   // ---- Core2 CoreS3 -------------
   M5.begin(cfg);
